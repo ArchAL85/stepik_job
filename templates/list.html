@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <main class="container mt-3">
+      {% for vacancy in vacancies %}
+        <section>
+          <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;"><strong>{{ vacancy.specialty__title }}</strong></h1>
+          <p class="text-center pt-1">{{ vacancy.count }} вакансий</p>
+          <div class="row mt-5">
+              {% for cur_vacancy in vacancy.vacancies %}
+                <div class="col-12 col-lg-8 offset-lg-2 m-auto">
+                  <div class="card mb-4">
+                    <div class="card-body px-4">
+                      <div class="row">
+                        <div class="col-12 col-md-8 col-lg-9">
+                            <h2 class="h2 pb-2"><a href="/jobs/{{ cur_vacancy.id }}">{{ cur_vacancy.title }}</a></h2>
+                          <p class="mb-2">{{ cur_vacancy.description }}</p>
+                          <p>От {{ cur_vacancy.salary_min }} до {{ cur_vacancy.salary_max }} руб.</p>
+                          <p class="text-muted pt-1">{{ cur_vacancy.published_at|date:"j E"}}</p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 d-flex align-items-end">
+                          <a href="#"><img src="{{ cur_vacancy.company.logo }}" width="130" height="80" alt=""></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+  </main>
+
+ {% endblock %}
